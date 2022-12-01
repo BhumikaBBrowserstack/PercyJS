@@ -15,7 +15,7 @@
     "test": "percy exec -- node tests/test.js"
   },
   "devDependencies": {
-    "@percy/cli": "^1.0.5",
+    "@percy/cli": "^1.16.0",
     "@percy/selenium-webdriver": "^1.0.2",
     "geckodriver": "^3.0.1",
     "http-server": "^0.11.1",
