@@ -1,5 +1,5 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
-//const firefox = require('selenium-webdriver/firefox');
+const chrome = require('selenium-webdriver/chrome');
 const percySnapshot = require('@percy/selenium-webdriver');
 const httpServer = require('http-server');
 const spawn = require('child_process').spawn;
@@ -22,10 +22,10 @@ async function cleanup({ driver, server, isError = 0 }) {
   let driver;
 
   try {
-    // driver = await new Builder()
-    //   .forBrowser('firefox').setFirefoxOptions(
-    //     new firefox.Options().headless()
-    //   ).build();
+    driver = await new Builder()
+      .forBrowser('chrome').setChromeOptions(
+        new chrome.Options().headless()
+      ).build();
 
     async function emptyTodos() {
       await driver.get(TEST_URL);
