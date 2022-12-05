@@ -28,12 +28,12 @@ jobs:
       - image: cimg/node:16.13.0
     steps:
       - checkout
-      - node/install-npm
+      
       - node/install:
           node-version: "16.13.0"
       - node/install-packages:
           cache-path: node_modules
-          override-ci-command: npm ci
+          
           
       - run:
           
