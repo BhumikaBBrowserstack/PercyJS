@@ -5,14 +5,24 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
   node: circleci/node@4.7
+
 jobs:
+            
   build:
     executor: node/default
     steps:
       - checkout
       - node/install-npm
+      - command: |
+            
+              export NVM_DIR="/opt/circleci/.nvm"
+              [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+              nvm install v8.11.3 && nvm alias default v8.11.3
+              ./load-nvm.sh
+              nvm install v8.11.3
+              nvm alias default v8.11.3
       - node/install:
-          node-version: "16.13.0"
+          node-version: "16.0.0"
       - node/install-packages:
           cache-path: node_modules
           override-ci-command: npm i
