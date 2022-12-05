@@ -32,7 +32,7 @@ jobs:
       - run:
           
           name: Test
-          command: npx PERCY_TOKEN=6fa3ee472504b3887646a9e099508a72d6bba3a32bfc408c580ae5e0821a4303 percy exec -- npm run test
+          command: PERCY_TOKEN=6fa3ee472504b3887646a9e099508a72d6bba3a32bfc408c580ae5e0821a4303 npx percy exec -- npm run test
            
           
       
