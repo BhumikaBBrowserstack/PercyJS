@@ -6,6 +6,23 @@ version: 2.1
 orbs:
   node: circleci/node@4.7
 jobs:
+
+  prepare:
+    
+    docker:
+    - image: cimg/node:16.13.0
+    
+    environment:
+      NPM_VERSION: "9.1.3"
+    steps:
+    - checkout
+    - run:
+        name: Install dependencies
+        command: |
+          
+            sudo npm install -g npm@$NPM_VERSION
+            npm ci
+          
   build:
     docker:
       - image: cimg/node:16.13.0
@@ -22,9 +39,7 @@ jobs:
           
           name: Test
           command: npx PERCY_TOKEN=6fa3ee472504b3887646a9e099508a72d6bba3a32bfc408c580ae5e0821a4303 percy exec -- npm run test
-           |
-            sudo npm install -g npm@9.1.3
-            npm ci
+           
           
       
 # Invoke jobs via workflows
@@ -33,7 +48,9 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      - prepare
       - build
+          
       
 
 # workflows:
