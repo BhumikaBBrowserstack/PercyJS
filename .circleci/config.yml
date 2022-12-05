@@ -28,13 +28,7 @@ jobs:
       - image: cimg/node:16.13.0
     steps:
       - checkout
-      
-      - node/install:
-          node-version: "16.13.0"
-      - node/install-packages:
-          cache-path: node_modules
-          
-          
+       
       - run:
           
           name: Test
