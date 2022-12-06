@@ -1,0 +1,31 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.2
+
+machine:
+  environment:
+    BROWSERSTACK_USERNAME: "bhumikababbar_q5NCrf"
+    BROWSERSTACK_ACCESS_KEY: "rs6Ttgm3DfV99x8im7VV"
+    BROWSERSTACK_LOCAL: false
+
+jobs:
+  build_and_test: # this can be any name you choose
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run test
+          name: Run tests
+      - run:
+          command: export PERCY_TOKEN=6fa3ee472504b3887646a9e099508a72d6bba3a32bfc408c580ae5e0821a4303
+          name: percy command
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+workflows:
+  build_and_test:
