@@ -1,54 +1,35 @@
-# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
 
-# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
-# See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
-  node: circleci/node@4.7
+  node: circleci/node@5.0.2
+
+machine:
+  environment:
+    BROWSERSTACK_USERNAME: "bhumikababbar_q5NCrf"
+    BROWSERSTACK_ACCESS_KEY: "rs6Ttgm3DfV99x8im7VV"
+    BROWSERSTACK_LOCAL: false
 
 jobs:
-            
-  build:
-    executor: node/default
+  build_and_test: # this can be any name you choose
+    
+    docker:
+      - image: cimg/node:16.10
     steps:
       - checkout
-      - node/install-npm
-      - command: |
-            
-              export NVM_DIR="/opt/circleci/.nvm"
-              [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-              nvm install v8.11.3 && nvm alias default v8.11.3
-              ./load-nvm.sh
-              nvm install v8.11.3
-              nvm alias default v8.11.3
-      - node/install:
-          node-version: "16.0.0"
       - node/install-packages:
-          cache-path: node_modules
-          override-ci-command: npm i
-          
+          pkg-manager: npm
       - run:
-          name: Test
-          command: npx PERCY_TOKEN=6fa3ee472504b3887646a9e099508a72d6bba3a32bfc408c580ae5e0821a4303 percy exec -- npm run test
-      
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      
+          command: npm run test
+          name: Run tests
+      - run:
+          command: export PERCY_TOKEN=6fa3ee472504b3887646a9e099508a72d6bba3a32bfc408c580ae5e0821a4303
+          name: percy command
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
 
-# workflows:
-#   sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-#     # Inside the workflow, you define the jobs you want to run.
-#     jobs:
-#       - node/test:
-#           # This is the node version to use for the `cimg/node` tag
-#           # Relevant tags can be found on the CircleCI Developer Hub
-#           # https://circleci.com/developer/images/image/cimg/node
-#           version: '16.10'
-#           # If you are using yarn, change the line below from "npm" to "yarn"
-#           pkg-manager: npm
-          
+workflows:
+  test_my_app:
+    jobs:
+      - build_and_test
