@@ -1,35 +1,26 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-orbs:
-  node: circleci/node@5.0.2
-
-machine:
-  environment:
-    BROWSERSTACK_USERNAME: "bhumikababbar_q5NCrf"
-    BROWSERSTACK_ACCESS_KEY: "rs6Ttgm3DfV99x8im7VV"
-    BROWSERSTACK_LOCAL: false
-
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build_and_test: # this can be any name you choose
-    
+  say-hello:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: cimg/node:16.10
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
       - run:
-          command: npm run test
-          name: Run tests
-      - run:
-          command: export PERCY_TOKEN=6fa3ee472504b3887646a9e099508a72d6bba3a32bfc408c580ae5e0821a4303
-          name: percy command
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
+          name: "Say hello"
+          command: "echo Hello, World!"
 
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  test_my_app:
+  say-hello-workflow:
     jobs:
-      - build_and_test
+      - say-hello
