@@ -15,12 +15,12 @@
     "test": "percy exec -- node tests/test.js"
   },
   "devDependencies": {
-    "@percy/cli": "^1.16.0",
-    "@percy/selenium-webdriver": "^1.0.2",
+    "@percy/cli": "1.16.0",
+    "@percy/selenium-webdriver": "1.0.2",
     
-    "http-server": "^0.11.1",
-    "selenium-webdriver": "^4.0.0",
-    "todomvc-app-css": "^2.2.0",
-    "todomvc-common": "^1.0.5"
+    "http-server": "0.11.1",
+    "selenium-webdriver": "4.0.0",
+    "todomvc-app-css": "2.2.0",
+    "todomvc-common": "1.0.5"
   }
 }
