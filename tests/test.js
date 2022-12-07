@@ -15,7 +15,7 @@ const capabilities = {
     osVersion: '10'
   },
   browserName: 'Chrome',
-  browserVersion: '106'
+  browserVersion: 'latest'
 };
 
 // server.listen(PORT);
