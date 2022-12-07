@@ -18,8 +18,8 @@ const capabilities = {
   browserVersion: 'latest'
 };
 
-server.listen(PORT);
-console.log(`Server is listening on ${TEST_URL}`);
+// server.listen(PORT);
+// console.log(`Server is listening on ${TEST_URL}`);
 
 async function cleanup({ driver, server, isError = 0 }) {
   driver && (await driver.quit());
@@ -38,29 +38,30 @@ async function cleanup({ driver, server, isError = 0 }) {
 
     async function emptyTodos() {
       await driver.get(TEST_URL);
-      await driver.wait(until.titleIs('VanillaJS • TodoMVC'), 1000);
-      await percySnapshot(driver, 'Empty Todos');
-    }
-
-    async function newTodo() {
-      await driver.get(TEST_URL);
-      await driver.wait(until.titleIs('VanillaJS • TodoMVC'), 1000);
-
-      await driver.findElement(By.className('new-todo')).sendKeys('Write tests', Key.ENTER);
-      await percySnapshot(driver, 'New todo');
-    }
-
-    async function completeTodo() {
-      await driver.get(TEST_URL);
-      await driver.wait(until.titleIs('VanillaJS • TodoMVC'), 1000);
-
-      await driver.findElement(By.css('.todo-list li:first-child .toggle')).click();
       await percySnapshot(driver, 'Completed todo');
+      // await driver.wait(until.titleIs('VanillaJS • TodoMVC'), 1000);
+      // await percySnapshot(driver, 'Empty Todos');
     }
+
+    // async function newTodo() {
+    //   await driver.get(TEST_URL);
+    //   await driver.wait(until.titleIs('VanillaJS • TodoMVC'), 1000);
+
+    //   await driver.findElement(By.className('new-todo')).sendKeys('Write tests', Key.ENTER);
+    //   await percySnapshot(driver, 'New todo');
+    // }
+
+    // async function completeTodo() {
+    //   await driver.get(TEST_URL);
+    //   await driver.wait(until.titleIs('VanillaJS • TodoMVC'), 1000);
+
+    //   await driver.findElement(By.css('.todo-list li:first-child .toggle')).click();
+    //   await percySnapshot(driver, 'Completed todo');
+    // }
 
     await emptyTodos();
-    await newTodo();
-    await completeTodo();
+    // await newTodo();
+    // await completeTodo();
   } catch (error) {
     console.log(error);
     await cleanup({ driver, server, isError: 1 });
