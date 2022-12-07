@@ -28,7 +28,7 @@
     "discovery": {
       
       "launch-options": {
-        "executable": "chromeLinux.deb"
+        "executable": "/usr/bin/google-chrome-stable"
         
       }
     }
