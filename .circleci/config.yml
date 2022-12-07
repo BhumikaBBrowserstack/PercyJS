@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run: npm install
       - run: npm install --save-dev @percy/cli
-      - run: npx percy exec -- npm run test 
+      - run: npm run test 
 
   # test:
   #   working_directory: ~/circleci-node
