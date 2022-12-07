@@ -1,0 +1,30 @@
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  
+  build:
+    working_directory: ~/circleci-node
+    docker:
+     - image: cimg/node:16.13.0
+        
+    steps:
+      - checkout
+      - run: npm install
+
+  test:
+    working_directory: ~/circleci-node
+    docker:
+     - image: cimg/node:16.13.0
+        
+    steps:
+      - checkout
+      - run: PERCY_TOKEN=6fa3ee472504b3887646a9e099508a72d6bba3a32bfc408c580ae5e0821a4303 npx percy exec -- npm run test  
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
