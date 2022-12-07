@@ -12,20 +12,21 @@ jobs:
       - checkout
       - run: npm install
       - run: npm install --save-dev @percy/cli
+      - run: npx percy exec -- npm run test 
 
-  test:
-    working_directory: ~/circleci-node
-    docker:
-     - image: cimg/node:16.13.0
+  # test:
+  #   working_directory: ~/circleci-node
+  #   docker:
+  #    - image: cimg/node:16.13.0
         
-    steps:
-      - checkout
-      - run: npx percy exec -- npm run test  
+  #   steps:
+  #     - checkout
+  #     - run: npx percy exec -- npm run test  
 
 workflows:
   build_and_test:
     jobs:
       - build
-      - test:
-          requires:
-            - build
+      # - test:
+      #     requires:
+      #       - build
