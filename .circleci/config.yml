@@ -21,6 +21,7 @@ jobs:
       - checkout
       - run: npm install
       - run: npm install --save-dev @percy/cli
+      - run: apt install libnss
       - run: npm run test 
 
   # test:
