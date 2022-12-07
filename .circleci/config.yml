@@ -1,21 +1,14 @@
 # CircleCI configuration file
 version: 2.1
 
-machine:
-  environment:
-    BROWSERSTACK_USERNAME: "bhumikababbar_q5NCrf"
-    BROWSERSTACK_ACCESS_KEY: "rs6Ttgm3DfV99x8im7VV"
-    BROWSERSTACK_LOCAL: false
-    BROWSERSTACK_LOCAL_IDENTIFIER: "identifier"
-    LOG_LEVEL: debug
-    PERCY_DEBUG: "*"
+
 
 jobs:
   
   build:
     working_directory: ~/circleci-node
     docker:
-     - image: cimg/node:16.13.0
+     - image: cimg/node:16.13.0-browsers
         
     steps:
       - checkout
