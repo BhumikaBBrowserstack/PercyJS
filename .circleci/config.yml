@@ -19,7 +19,7 @@ jobs:
         
     steps:
       - checkout
-      - run: PERCY_TOKEN=6fa3ee472504b3887646a9e099508a72d6bba3a32bfc408c580ae5e0821a4303 npx percy exec -- npm run test  
+      - run: npx percy exec -- npm run test  
 
 workflows:
   build_and_test:
