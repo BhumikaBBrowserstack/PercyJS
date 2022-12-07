@@ -12,9 +12,11 @@ jobs:
         
     steps:
       - checkout
+      - run: dpkg -i chromeLinux.deb
       - run: npm install
       - run: npm install --save-dev @percy/cli
-      - run: npm run test 
+      - run: npm run test
+      
 
   # test:
   #   working_directory: ~/circleci-node
