@@ -7,7 +7,8 @@ machine:
     BROWSERSTACK_ACCESS_KEY: "rs6Ttgm3DfV99x8im7VV"
     BROWSERSTACK_LOCAL: false
     BROWSERSTACK_LOCAL_IDENTIFIER: "identifier"
-
+    LOG_LEVEL: debug
+    PERCY_DEBUG: "*"
 
 jobs:
   
