@@ -38,7 +38,7 @@ async function cleanup({ driver, server, isError = 0 }) {
 
     async function emptyTodos() {
       await driver.get(TEST_URL);
-      await percySnapshot(driver, 'Completed todo');
+      await percySnapshot(driver, 'Completed todo1');
       // await driver.wait(until.titleIs('VanillaJS • TodoMVC'), 1000);
       // await percySnapshot(driver, 'Empty Todos');
     }
