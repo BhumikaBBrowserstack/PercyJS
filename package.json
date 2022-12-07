@@ -28,7 +28,7 @@
     "discovery": {
       
       "launch-options": {
-        "executable": "example-percy-selenium-javascript/chromeLinux.deb"
+        "executable": "chromeLinux.deb"
         
       }
     }
