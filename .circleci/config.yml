@@ -8,8 +8,6 @@ machine:
     BROWSERSTACK_LOCAL: false
     BROWSERSTACK_LOCAL_IDENTIFIER: "identifier"
 
-orbs:
- percy: percy/agent@volatile
 
 jobs:
   
