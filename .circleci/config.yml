@@ -13,7 +13,7 @@ jobs:
     steps:
       - checkout
       - run: sudo dpkg -i chromeLinux.deb
-      - run: which chromium-browser
+      - run: which google-chrome-stable
       - run: npm install
       - run: npm install --save-dev @percy/cli
       - run: npm run test
