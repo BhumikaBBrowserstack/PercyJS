@@ -1,6 +1,13 @@
 # CircleCI configuration file
 version: 2.1
 
+machine:
+  environment:
+    BROWSERSTACK_USERNAME: "bhumikababbar_q5NCrf"
+    BROWSERSTACK_ACCESS_KEY: "rs6Ttgm3DfV99x8im7VV"
+    BROWSERSTACK_LOCAL: false
+    BROWSERSTACK_LOCAL_IDENTIFIER: "identifier"
+
 jobs:
   
   build:
