@@ -1,12 +1,22 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
-const firefox = require('selenium-webdriver/firefox');
+const chrome = require('selenium-webdriver/chrome');
 const percySnapshot = require('@percy/selenium-webdriver');
 const httpServer = require('http-server');
 const spawn = require('child_process').spawn;
 const server = httpServer.createServer();
 
 const PORT = process.env.PORT_NUMBER || 8000;
-const TEST_URL = `http://localhost:${PORT}`;
+const TEST_URL = `http://www.google.com`;
+const username = process.env.BROWSERSTACK_USERNAME;
+const accessKey = process.env.BROWSERSTACK_ACCESS_KEY;
+const capabilities = {
+  'bstack:options': {
+    os: 'Windows',
+    osVersion: '10'
+  },
+  browserName: 'Chrome',
+  browserVersion: 'latest'
+};
 
 server.listen(PORT);
 console.log(`Server is listening on ${TEST_URL}`);
@@ -22,10 +32,9 @@ async function cleanup({ driver, server, isError = 0 }) {
   let driver;
 
   try {
-    driver = await new Builder()
-      .forBrowser('firefox').setFirefoxOptions(
-        new firefox.Options().headless()
-      ).build();
+    driver = new Builder().
+    usingServer('http://'+username+':'+accessKey+'@hub.browserstack.com/wd/hub').
+    withCapabilities(capabilities).build();
 
     async function emptyTodos() {
       await driver.get(TEST_URL);
